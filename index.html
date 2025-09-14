@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hairbnb — Book Hairdressers</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">Hairbnb</div>
+      <nav class="nav">
+        <button class="link" data-view="browseView">Browse</button>
+        <button class="link" data-view="bookView">Book</button>
+        <button class="link" data-view="myBookingsView">My Bookings</button>
+        <button class="link" data-view="adminView">Admin</button>
+      </nav>
+      <div class="auth">
+        <span id="currentUserLabel">Guest</span>
+        <button id="openLogin">Login</button>
+        <button id="logoutBtn" class="secondary hidden">Logout</button>
+      </div>
+    </header>
+
+    <main id="app">
+      <!-- Browse Hairdressers -->
+      <section id="browseView" class="view">
+        <h2>Find a Hairdresser</h2>
+        <div class="row gap">
+          <input type="text" id="searchInput" placeholder="Search by name or service..." />
+          <button id="clearSearch" class="secondary">Clear</button>
+        </div>
+        <div id="hairdresserList" class="cards"></div>
+      </section>
+
+      <!-- Booking View -->
+      <section id="bookView" class="view hidden">
+        <h2>Book an Appointment</h2>
+        <div class="grid two">
+          <div>
+            <label>Hairdresser</label>
+            <select id="bookHairdresser"></select>
+          </div>
+          <div>
+            <label>Service</label>
+            <select id="bookService"></select>
+          </div>
+          <div>
+            <label>Date</label>
+            <input type="date" id="bookDate" />
+          </div>
+          <div>
+            <label>Time</label>
+            <select id="bookTime"></select>
+          </div>
+        </div>
+        <div class="row right gap">
+          <button id="submitBooking">Book</button>
+        </div>
+        <div id="bookMsg" class="msg"></div>
+      </section>
+
+      <!-- My Bookings -->
+      <section id="myBookingsView" class="view hidden">
+        <h2>My Bookings</h2>
+        <div id="myBookingsList" class="list"></div>
+      </section>
+
+      <!-- Admin View -->
+      <section id="adminView" class="view hidden">
+        <h2>Hairdresser Admin</h2>
+        <div id="adminGate" class="panel">
+          <p>Login as hairdresser to manage your profile and services.</p>
+          <button id="goToLoginFromAdmin">Login</button>
+          <p class="muted">No account? Create below.</p>
+        </div>
+
+        <div id="adminPanel" class="hidden">
+          <h3>Profile</h3>
+          <div class="grid two">
+            <div>
+              <label>Name</label>
+              <input id="adminName" type="text" placeholder="Your business name" />
+            </div>
+            <div>
+              <label>Location</label>
+              <input id="adminLocation" type="text" placeholder="City / Address" />
+            </div>
+          </div>
+          <div class="row right gap">
+            <button id="saveProfile">Save Profile</button>
+          </div>
+
+          <h3>Services</h3>
+          <div class="grid three">
+            <input id="svcName" placeholder="Service name" />
+            <input id="svcDuration" type="number" min="15" step="15" placeholder="Duration (min)" />
+            <input id="svcPrice" type="number" min="0" step="1" placeholder="Price" />
+          </div>
+          <div class="row right gap">
+            <button id="addService">Add Service</button>
+          </div>
+          <div id="servicesList" class="chips"></div>
+
+          <h3>Working Hours</h3>
+          <div class="grid two">
+            <div>
+              <label>Start</label>
+              <input id="startHour" type="time" value="09:00" />
+            </div>
+            <div>
+              <label>End</label>
+              <input id="endHour" type="time" value="18:00" />
+            </div>
+          </div>
+          <p class="muted">Slots are generated every 30 minutes.</p>
+          <div class="row right gap">
+            <button id="saveHours">Save Hours</button>
+          </div>
+        </div>
+
+        <div id="createAccount" class="panel">
+          <h3>Create Hairdresser Account</h3>
+          <div class="grid two">
+            <input id="regName" placeholder="Business name" />
+            <input id="regEmail" type="email" placeholder="Email" />
+            <input id="regPassword" type="password" placeholder="Password" />
+            <input id="regLocation" placeholder="Location" />
+          </div>
+          <div class="row right gap">
+            <button id="registerHairdresser">Create Account</button>
+          </div>
+          <div id="regMsg" class="msg"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Login Modal -->
+    <dialog id="loginModal">
+      <form method="dialog" class="modal">
+        <h3>Login</h3>
+        <div class="tabs">
+          <button type="button" class="tab active" data-tab="userTab">User</button>
+          <button type="button" class="tab" data-tab="hairdresserTab">Hairdresser</button>
+        </div>
+        <div id="userTab" class="tabpane">
+          <input id="userName" placeholder="Your name (or continue as Guest)" />
+          <div class="row gap right">
+            <button id="continueAsGuest" value="cancel" class="secondary">Continue as Guest</button>
+            <button id="userLoginBtn">Use This Name</button>
+          </div>
+        </div>
+        <div id="hairdresserTab" class="tabpane hidden">
+          <input id="loginEmail" type="email" placeholder="Email" />
+          <input id="loginPassword" type="password" placeholder="Password" />
+          <div class="row gap right">
+            <button value="cancel" class="secondary">Cancel</button>
+            <button id="hairdresserLoginBtn">Login</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+
+    <footer class="footer">
+      <span>Simple MVP. Data stored locally in your browser.</span>
+    </footer>
+
+    <script src="assets/app.js"></script>
+  </body>
+  </html>
+
